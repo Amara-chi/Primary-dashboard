@@ -528,62 +528,6 @@ const Progress = () => {
           </div>
         </motion.div>
       </div>
-
-      {/* Achievements Gallery */}
-      <motion.div 
-        className="bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-slate-800 dark:to-slate-700 rounded-2xl lg:rounded-3xl p-6 lg:p-8 shadow-xl border border-yellow-100 dark:border-slate-600"
-        variants={itemVariants}
-      >
-        <h2 className="text-xl lg:text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3">
-          <motion.div
-            animate={{ rotate: [0, 360] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-          >
-            🏆
-          </motion.div>
-          Achievement Gallery
-        </h2>
-        
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
-          {achievements.map((achievement, index) => (
-            <motion.div
-              key={index}
-              className="bg-white dark:bg-slate-700 rounded-xl p-4 lg:p-6 shadow-lg text-center"
-              initial={{ scale: 0, rotate: -180 }}
-              animate={{ scale: 1, rotate: 0 }}
-              transition={{ delay: index * 0.1, type: "spring", stiffness: 200 }}
-              whileHover={{ scale: 1.05, y: -5 }}
-            >
-              <motion.div 
-                className={`w-16 h-16 lg:w-20 lg:h-20 mx-auto mb-4 rounded-full bg-gradient-to-r ${getRarityColor(achievement.rarity)} flex items-center justify-center text-white shadow-lg`}
-                animate={{ 
-                  rotate: [0, 10, -10, 0],
-                  scale: [1, 1.1, 1]
-                }}
-                transition={{ duration: 3, repeat: Infinity }}
-              >
-                <span className="text-2xl lg:text-3xl">{achievement.icon}</span>
-              </motion.div>
-              <h3 className="font-bold text-sm lg:text-base text-gray-900 dark:text-white mb-2">
-                {achievement.title}
-              </h3>
-              <p className="text-xs lg:text-sm text-gray-600 dark:text-gray-400 mb-2">
-                {achievement.description}
-              </p>
-              <p className="text-xs text-gray-500 dark:text-gray-500">
-                {new Date(achievement.date).toLocaleDateString()}
-              </p>
-              <motion.div 
-                className={`mt-2 px-2 py-1 rounded-full text-xs font-bold text-white bg-gradient-to-r ${getRarityColor(achievement.rarity)}`}
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                {achievement.rarity.toUpperCase()}
-              </motion.div>
-            </motion.div>
-          ))}
-        </div>
-      </motion.div>
     </motion.div>
   );
 };

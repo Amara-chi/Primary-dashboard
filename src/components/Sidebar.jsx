@@ -1,9 +1,9 @@
 import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { 
   Home, BookOpen, FileText, TrendingUp, 
   Library, Calendar, User, GraduationCap,
-  Sun, Moon, Settings
+  Sun, Moon
 } from 'lucide-react';
 
 const Sidebar = ({ activeSection, onSectionChange, isOpen, onToggle, theme, onThemeToggle }) => {
@@ -11,16 +11,11 @@ const Sidebar = ({ activeSection, onSectionChange, isOpen, onToggle, theme, onTh
     { id: 'dashboard', label: 'Dashboard', icon: Home, gradient: 'from-blue-500 to-cyan-500' },
     { id: 'academics', label: 'Academics', icon: BookOpen, gradient: 'from-green-500 to-emerald-500' },
     { id: 'assignments', label: 'Assignments', icon: FileText, gradient: 'from-orange-500 to-red-500' },
-    { id: 'progress', label: 'Progress', icon: TrendingUp, gradient: 'from-purple-500 to-pink-500' },
-    { id: 'library', label: 'Library', icon: Library, gradient: 'from-indigo-500 to-blue-500' },
-    { id: 'calendar', label: 'Calendar', icon: Calendar, gradient: 'from-teal-500 to-green-500' },
+    { id: 'progress', label: 'Report', icon: TrendingUp, gradient: 'from-purple-500 to-pink-500' },
+    // { id: 'library', label: 'Library', icon: Library, gradient: 'from-indigo-500 to-blue-500' },
+    { id: 'calendar', label: 'Events', icon: Calendar, gradient: 'from-teal-500 to-green-500' },
     { id: 'profile', label: 'Profile', icon: User, gradient: 'from-pink-500 to-rose-500' },
   ];
-
-  const sidebarVariants = {
-    open: { x: 0, transition: { type: "spring", stiffness: 300, damping: 30 } },
-    closed: { x: -288, transition: { type: "spring", stiffness: 300, damping: 30 } }
-  };
 
   const itemVariants = {
     hidden: { x: -20, opacity: 0 },
@@ -32,17 +27,15 @@ const Sidebar = ({ activeSection, onSectionChange, isOpen, onToggle, theme, onTh
   };
 
   return (
-    <motion.div 
-      className={`fixed left-0 top-0 h-screen w-72 z-50 ${
+    <div 
+      className={`fixed left-0 top-0 h-screen w-72 z-50 transition-transform duration-300 transform ${
         theme === 'dark' 
           ? 'bg-gradient-to-b from-slate-800 via-slate-900 to-slate-800' 
           : 'bg-gradient-to-b from-white via-gray-50 to-white'
       } shadow-2xl border-r ${
         theme === 'dark' ? 'border-gray-700' : 'border-gray-200'
-      } backdrop-blur-xl`}
-      variants={sidebarVariants}
-      animate={isOpen ? "open" : "closed"}
-      initial="closed"
+      } backdrop-blur-xl
+      ${isOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0`}
     >
       {/* Close button for mobile */}
       <button
@@ -105,7 +98,6 @@ const Sidebar = ({ activeSection, onSectionChange, isOpen, onToggle, theme, onTh
               whileHover={{ x: 5 }}
               whileTap={{ scale: 0.98 }}
             >
-              {/* Background gradient effect */}
               {!isActive && (
                 <motion.div
                   className={`absolute inset-0 bg-gradient-to-r ${item.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}
@@ -122,7 +114,6 @@ const Sidebar = ({ activeSection, onSectionChange, isOpen, onToggle, theme, onTh
               </motion.div>
               <span className="font-semibold text-lg">{item.label}</span>
               
-              {/* Active indicator */}
               {isActive && (
                 <motion.div
                   className="absolute right-4 w-2 h-2 bg-white rounded-full"
@@ -180,7 +171,7 @@ const Sidebar = ({ activeSection, onSectionChange, isOpen, onToggle, theme, onTh
           </p>
         </motion.div>
       </motion.div>
-    </motion.div>
+    </div>
   );
 };
 
